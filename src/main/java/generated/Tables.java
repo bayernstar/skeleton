@@ -5,6 +5,7 @@ package generated;
 
 
 import generated.tables.Receipts;
+import generated.tables.Tags;
 
 import javax.annotation.Generated;
 
@@ -21,6 +22,11 @@ import javax.annotation.Generated;
 )
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Tables {
+
+	/**
+	 * The table public.tags
+	 */
+	public static final Tags TAGS = generated.tables.Tags.TAGS;
 
 	/**
 	 * The table public.receipts
