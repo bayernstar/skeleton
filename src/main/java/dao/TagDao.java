@@ -8,7 +8,8 @@ import org.jooq.impl.DSL;
 
 import java.util.List;
 
-import static com.google.common.base.Preconditions.checkState;
+import java.util.stream.Collectors;
+
 import static generated.Tables.RECEIPTS;
 import static generated.Tables.TAGS;
 
@@ -29,5 +30,14 @@ public class TagDao {
         return dsl.selectFrom(RECEIPTS).
                 where(RECEIPTS.ID.in(dsl.select(TAGS.ID).from(TAGS).where(TAGS.TAG.eq(tagName))))
                 .fetch();
+    }
+
+    public List<TagsRecord> getTags(int id) {
+        return dsl.selectFrom(TAGS).where(TAGS.ID.eq(id)).fetch();
+    }
+
+    public List<String> getTagsForReceipt(int id) {
+        return dsl.selectFrom(TAGS).where(TAGS.ID.eq(id)).fetch()
+                .stream().map(x->x.getTag()).collect(Collectors.toList());
     }
 }
